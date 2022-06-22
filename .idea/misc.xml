@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$/chat" />
+      <file path="$PROJECT_DIR$/daytime" />
+      <file path="$PROJECT_DIR$/echo" />
+      <file path="$PROJECT_DIR$/echo_ts" />
+      <file path="$PROJECT_DIR$/hello_world" />
+      <file path="$PROJECT_DIR$/protobuf" />
+      <file path="$PROJECT_DIR$/tcp_server" />
+      <file path="$PROJECT_DIR$/timer" />
+    </sourceRoots>
+  </component>
 </project>

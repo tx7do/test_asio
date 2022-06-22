@@ -1,7 +1,9 @@
+project(daytime_server)
+
 aux_source_directory(. DIR_SRCS)
 
-add_executable(daytime_server ${DIR_SRCS})
+add_executable(${PROJECT_NAME} ${DIR_SRCS})
 
 include_directories(../../)
 
-target_link_libraries(daytime_server pthread ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} pthread ${Boost_LIBRARIES})
