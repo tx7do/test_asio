@@ -4,11 +4,21 @@
 
 * Asio 的Linux Epoll实现，使用的是水平触发模式（Level Trigger）。
 
+1. 单context，单thread；
+2. 单context，多thread；
+3. 多context，多thread（一对一）。
+
+cpprest采用的是单context，多thread。  
+MongoDB采用的是：acceptor一个context一个thread；每个连接也是一个context一个thread。
+
 ## Ubuntu安装依赖项
 
 ```bash
+# 开发必要软件包，包含：dpkg-dev fakeroot g++ g++-4.6 libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libdpkg-perl libstdc++6-4.6-dev libtimedate-perl
+sudo apt-get install build-essential
+
 # build tools
-sudo apt-get install cmake gcc clang gdb llvm lldb llvm-dev liblldb-dev build-essential
+sudo apt-get install cmake gcc clang gdb llvm lldb llvm-dev liblldb-dev
 
 # Boost.Asio
 sudo apt-get install libboost-dev
@@ -79,3 +89,6 @@ bool can_execute()
 * [To post or to dispatch?](http://thisthread.blogspot.com/2011/06/to-post-or-to-dispatch.html)
 * [Multithreaded execution with asio, part 1](https://dens.website/tutorials/cpp-asio/multithreading)
 * [Multithreaded execution with asio, part 2](https://dens.website/tutorials/cpp-asio/multithreading-2)
+* [【翻译】为何我们要使用boost strands](https://www.jianshu.com/p/70286c2ab544)
+* [Strands](https://zhuanlan.zhihu.com/p/87388918)
+* [How strands work and why you should use them](http://www.crazygaze.com/blog/2016/03/17/how-strands-work-and-why-you-should-use-them/)
