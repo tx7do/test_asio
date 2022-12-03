@@ -13,10 +13,13 @@
 bool Connection::m_logError = true;
 
 Connection::Connection(boost::asio::ip::tcp::socket* socket,
-	boost::asio::io_service& io_service,
+	boost::asio::io_context& ioc,
 	ServicePort_ptr service_port)
-	: m_socket(socket), m_readTimer(io_service), m_writeTimer(io_service), m_io_service(io_service), m_service_port(
-	service_port)
+	: m_socket(socket),
+	  m_readTimer(ioc),
+	  m_writeTimer(ioc),
+	  m_io_context(ioc),
+	  m_service_port(service_port)
 {
 	m_refCount = 0;
 	m_protocol = NULL;
@@ -141,7 +144,7 @@ void Connection::releaseConnection()
 
 void Connection::onStopOperation()
 {
-	//io_service thread
+	//io_context thread
 	m_connectionLock.lock();
 	m_readTimer.cancel();
 	m_writeTimer.cancel();
@@ -173,7 +176,7 @@ void Connection::deleteConnectionTask()
 	assert(m_refCount == 0);
 	try
 	{
-		m_io_service.dispatch(boost::bind(&Connection::onStopOperation, this));
+		m_io_context.dispatch(boost::bind(&Connection::onStopOperation, this));
 	}
 	catch (boost::system::system_error& e)
 	{

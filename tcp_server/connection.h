@@ -8,7 +8,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/io_service.hpp>
+#include <boost/asio/io_context.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 
@@ -26,7 +26,7 @@ class Connection : public boost::enable_shared_from_this<Connection>, boost::non
 
 public:
 	Connection(boost::asio::ip::tcp::socket* socket,
-		boost::asio::io_service& io_service,
+		boost::asio::io_context& ioc,
 		ServicePort_ptr service_port);
 	~Connection();
 
@@ -80,7 +80,7 @@ private:
 	boost::asio::ip::tcp::socket* m_socket;
 	boost::asio::deadline_timer m_readTimer;
 	boost::asio::deadline_timer m_writeTimer;
-	boost::asio::io_service& m_io_service;
+	boost::asio::io_context& m_io_context;
 	ServicePort_ptr m_service_port;
 	bool m_receivedFirst;
 	bool m_writeError;
@@ -102,7 +102,7 @@ public:
 	static ConnectionManager* getInstance();
 
 	Connection_ptr createConnection(boost::asio::ip::tcp::socket* socket,
-		boost::asio::io_service& io_service, ServicePort_ptr servicers);
+		boost::asio::io_context& io_context, ServicePort_ptr servicers);
 	void releaseConnection(Connection_ptr connection);
 	void closeAll();
 

@@ -33,8 +33,8 @@ int main() {
   const unsigned short kPortNumber = 65535;
 
   try {
-    boost::asio::io_service io_service;
-    udp::socket socket(io_service, boost::asio::ip::udp::v4());
+    boost::asio::io_context io_context;
+    udp::socket socket(io_context, boost::asio::ip::udp::v4());
 
     udp::endpoint endpoint(kIpAddress, kPortNumber);
     boost::system::error_code error;

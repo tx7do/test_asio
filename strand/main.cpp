@@ -55,7 +55,7 @@ private:
 	}
 
 private:
-	asio::io_service::strand _strand;
+	asio::io_context::strand _strand;
 	timer_ptr _timer;
 	std::atomic_int64_t _count;
 	std::atomic_bool _withStrand{ false };

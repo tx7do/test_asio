@@ -167,7 +167,7 @@ void test_single_context_multi_thread_with_guard()
 {
 	asio::io_context ctx;
 
-	work_ptr work(new asio::io_service::work(ctx));
+	work_ptr work(new asio::io_context::work(ctx));
 	boost::mutex mtx;
 
 	boost::thread_group workers;
@@ -202,9 +202,9 @@ void test_single_context_multi_thread_with_guard()
 void test_single_context_multi_thread_with_strand()
 {
 	asio::io_context ctx;
-	asio::io_service::strand strand(ctx);
+	asio::io_context::strand strand(ctx);
 
-	work_ptr work(new asio::io_service::work(ctx));
+	work_ptr work(new asio::io_context::work(ctx));
 	boost::mutex mtx;
 
 	size_t regular = 0, on_strand = 0;
